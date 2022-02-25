@@ -1,0 +1,20 @@
+# Use root/example user/password credentials
+version: '3.1'
+
+services:
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+    volumes:
+      - ./src:/var/www/html/
+
+  composer:
+    image: composer:latest
+    container_name: composer
+    command: install
+    volumes:
+      - ./src:/var/www/html
+    working_dir: /var/www/html
